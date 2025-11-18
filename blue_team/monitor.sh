@@ -117,6 +117,7 @@ analyze_plist() {
         if [ -n "$script_path" ]; then
             # Sprawdź czy skrypt jest w podejrzanej lokalizacji
             if [[ "$script_path" == *"/Library/Application Support"* ]] || \
+               [[ "$script_path" == *"/Users/Shared"* ]] || \
                [[ "$script_path" == *"/tmp"* ]] || \
                [[ "$script_path" == *"/var/tmp"* ]] || \
                [[ "$script_path" == *"$HOME"* ]]; then

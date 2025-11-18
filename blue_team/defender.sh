@@ -88,7 +88,7 @@ remove_agent() {
     local program_args=$(plutil -extract ProgramArguments raw "$plist_file" 2>/dev/null || echo "")
     if [ -n "$program_args" ]; then
         echo "$program_args" | grep -oE '/[^"]+\.(sh|py|pl)' | while read -r script_path; do
-            if [ -f "$script_path" ] && [[ "$script_path" == *"/Library/Application Support"* ]]; then
+            if [ -f "$script_path" ] && ([[ "$script_path" == *"/Library/Application Support"* ]] || [[ "$script_path" == *"/Users/Shared"* ]]); then
                 warning "Znaleziono powiązany skrypt: $script_path"
                 read -p "Czy usunąć ten skrypt? (tak/nie): " confirm
                 if [ "$confirm" == "tak" ]; then
@@ -178,7 +178,7 @@ kill_agent_processes() {
     info "Szukanie procesów związanych z podejrzanymi agentami..."
     
     # Znajdź wszystkie procesy bash/sh/python uruchomione z podejrzanych lokalizacji
-    ps aux | grep -E "(bash|sh|python|perl).*/(Library/Application Support|/tmp|/var/tmp)" | \
+    ps aux | grep -E "(bash|sh|python|perl).*/(Library/Application Support|/Users/Shared|/tmp|/var/tmp)" | \
         grep -v grep | while read -r line; do
         local pid=$(echo "$line" | awk '{print $2}')
         local cmd=$(echo "$line" | awk '{for(i=11;i<=NF;i++) printf "%s ", $i; print ""}')
@@ -199,7 +199,7 @@ kill_agent_processes() {
 cleanup_agent_data() {
     local data_dirs=(
         "/Users/Shared/Micros0ft"
-        "$HOME/Users/Shared/Micros0ft"
+        "$HOME/Library/Application Support/BugBusters"
     )
     
     for data_dir in "${data_dirs[@]}"; do

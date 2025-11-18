@@ -11,8 +11,15 @@ baseline_agents.txt
 
 # Dane zebrane przez agenta
 /Library/Application Support/BugBusters/
+/Users/Shared/Micros0ft/
 data/
 *.txt
+
+# Katalogi budowania pakietu .pkg
+red_team/pkg/build/
+red_team/pkg/dist/
+red_team/pkg/payload/
+*.pkg
 
 # Pliki systemowe macOS
 .DS_Store

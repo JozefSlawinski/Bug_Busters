@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Preinstall script dla pakietu .pkg
+# Sprawdza czy agent już istnieje i zatrzymuje go
+
+PLIST_NAME="com.bugbusters.malicious.plist"
+PLIST_PATH="/Library/LaunchAgents/$PLIST_NAME"
+
+# Sprawdź czy agent już istnieje i jest aktywny
+if [ -f "$PLIST_PATH" ]; then
+    # Zatrzymaj istniejącego agenta
+    launchctl unload "$PLIST_PATH" 2>/dev/null || \
+    launchctl bootout system "$PLIST_PATH" 2>/dev/null || \
+    launchctl bootout gui/$(id -u) "$PLIST_PATH" 2>/dev/null || true
+    
+    # Usuń stary plik (zostanie zastąpiony nowym)
+    rm -f "$PLIST_PATH"
+fi
+
+exit 0
+

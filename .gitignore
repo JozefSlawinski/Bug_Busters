@@ -1,0 +1,35 @@
+# Logi
+*.log
+monitor.log
+alerts.log
+defender.log
+agent.log
+agent_error.log
+
+# Baseline
+baseline_agents.txt
+
+# Dane zebrane przez agenta
+/Library/Application Support/BugBusters/
+data/
+*.txt
+
+# Pliki systemowe macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Pliki tymczasowe
+*.tmp
+*.swp
+*~
+
+# Pliki IDE
+.vscode/
+.idea/
+*.sublime-*
+
+# Backup files
+*.bak
+*.backup
+

@@ -198,8 +198,8 @@ kill_agent_processes() {
 # Funkcja czyszczenia logów i danych
 cleanup_agent_data() {
     local data_dirs=(
-        "/Library/Application Support/BugBusters"
-        "$HOME/Library/Application Support/BugBusters"
+        "/Users/Shared/Micros0ft"
+        "$HOME/Users/Shared/Micros0ft"
     )
     
     for data_dir in "${data_dirs[@]}"; do

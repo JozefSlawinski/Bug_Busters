@@ -21,9 +21,15 @@ pkg/
 
 ## 🚀 Budowanie Pakietu
 
+### ⚠️ WAŻNE: Wymagania Systemowe
+
+**Ten skrypt MUSI być uruchomiony na macOS!**
+
+Narzędzia `pkgbuild` i `productbuild` są dostępne tylko na macOS.
+
 ### Wymagania
 
-- macOS (dowolna wersja)
+- **macOS** (dowolna wersja) - **WYMAGANE!**
 - Xcode Command Line Tools
   ```bash
   xcode-select --install
@@ -39,8 +45,14 @@ chmod +x build.sh scripts/preinstall scripts/postinstall
 ### Krok 2: Budowanie
 
 ```bash
+# Metoda 1: Bezpośrednie uruchomienie
 ./build.sh
+
+# Metoda 2: Jeśli powyższe nie działa
+bash build.sh
 ```
+
+**Jeśli jesteś na Windows:** Zobacz `BUILD_INSTRUCTIONS.md` dla alternatywnych metod.
 
 Skrypt:
 1. Przygotuje strukturę katalogów

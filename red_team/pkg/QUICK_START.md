@@ -1,5 +1,9 @@
 # Szybki Start - Budowanie Pakietu .pkg
 
+## ⚠️ WAŻNE: Ten skrypt wymaga macOS!
+
+Jeśli jesteś na Windows, zobacz `BUILD_INSTRUCTIONS.md` dla alternatywnych metod.
+
 ## 🚀 W 3 Krokach
 
 ### 1. Przygotuj Skrypty
@@ -12,7 +16,8 @@ chmod +x build.sh scripts/preinstall scripts/postinstall
 ### 2. Zbuduj Pakiet
 
 ```bash
-./build.sh
+# Jeśli ./build.sh nie działa, spróbuj:
+bash build.sh
 ```
 
 ### 3. Zainstaluj

@@ -30,19 +30,36 @@ echo "================================"
 
 # Sprawdź czy jesteśmy na macOS
 if [[ "$OSTYPE" != "darwin"* ]]; then
-    echo -e "${YELLOW}⚠️  Ostrzeżenie: Ten skrypt powinien być uruchomiony na macOS${NC}"
+    echo -e "${RED}❌ BŁĄD: Ten skrypt wymaga macOS!${NC}"
+    echo ""
+    echo "Jesteś na systemie: $OSTYPE"
+    echo ""
+    echo "Opcje:"
+    echo "1. Uruchom ten skrypt na maszynie z macOS"
+    echo "2. Użyj maszyny wirtualnej z macOS"
+    echo "3. Zobacz BUILD_INSTRUCTIONS.md dla więcej informacji"
+    echo ""
+    exit 1
 fi
 
 # Sprawdź dostępność narzędzi
 if ! command -v pkgbuild &> /dev/null; then
-    echo -e "${YELLOW}❌ Błąd: pkgbuild nie jest dostępny${NC}"
-    echo "Zainstaluj Xcode Command Line Tools: xcode-select --install"
+    echo -e "${RED}❌ Błąd: pkgbuild nie jest dostępny${NC}"
+    echo ""
+    echo "Zainstaluj Xcode Command Line Tools:"
+    echo "  xcode-select --install"
+    echo ""
+    echo "Następnie uruchom ponownie ten skrypt."
     exit 1
 fi
 
 if ! command -v productbuild &> /dev/null; then
-    echo -e "${YELLOW}❌ Błąd: productbuild nie jest dostępny${NC}"
-    echo "Zainstaluj Xcode Command Line Tools: xcode-select --install"
+    echo -e "${RED}❌ Błąd: productbuild nie jest dostępny${NC}"
+    echo ""
+    echo "Zainstaluj Xcode Command Line Tools:"
+    echo "  xcode-select --install"
+    echo ""
+    echo "Następnie uruchom ponownie ten skrypt."
     exit 1
 fi
 
